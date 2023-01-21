@@ -10,11 +10,11 @@ def Careers_v(request):
 
 
 def Courses_v(request, id_careers):
-  courses = get_list_or_404(Course, id_career = int(id_careers))
+  courses = get_list_or_404(Course, id_career = str(id_careers))
   arr_courses = {}
   for course in courses:
     arr_time = {}
-    times = get_list_or_404(Time, cod_course = course.id)
+    times = get_list_or_404(Time, cod_course = str(course.id))
 
     for time in times :
       day = time.cod_day.day_name
