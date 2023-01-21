@@ -10,7 +10,7 @@ def Careers_v(request):
 
 
 def Courses_v(request, id_careers):
-  courses = get_list_or_404(Course, id_career = id_careers)
+  courses = get_list_or_404(Course, id_career = int(id_careers))
   arr_courses = {}
   for course in courses:
     arr_time = {}
@@ -19,13 +19,13 @@ def Courses_v(request, id_careers):
     for time in times :
       day = time.cod_day.day_name
       arr_time[day] = [
-        time.open_t,
-        time.close_t
+        int(time.open_t),
+        int(time.close_t)
       ]
 
     arr_courses[course.code] = {
       "nombre": course.name,
-      "creditos": course.credit_course,
+      "creditos": int(course.credit_course),
       "semestre": course.semester,
       "horas": arr_time,
       "aulas": course.clasroom,
