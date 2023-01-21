@@ -9,7 +9,7 @@ class Career(models.Model):
 class Course(models.Model):
  code = models.CharField(max_length=20)
  name = models.CharField(max_length=50)
- credit_course = models.IntegerField()
+ credit_course = models.CharField(max_length=20)
  semester = models.CharField(max_length=10)
  clasroom = models.CharField(max_length=35)
  id_career = models.ForeignKey(Career, on_delete=models.CASCADE )
@@ -29,8 +29,8 @@ class Day(models.Model):
 class Time(models.Model):
  cod_course = models.ForeignKey(Course, on_delete=models.CASCADE)
  cod_day = models.ForeignKey(Day, on_delete=models.CASCADE)
- open_t = models.IntegerField()
- close_t = models.IntegerField()
+ open_t = models.CharField(max_length=5)
+ close_t = models.CharField(max_length=5)
 
  class Meta:
   unique_together = ('cod_course', 'cod_day', 'open_t')

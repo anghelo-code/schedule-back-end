@@ -19,13 +19,13 @@ def Courses_v(request, id_careers):
     for time in times :
       day = time.cod_day.day_name
       arr_time[day] = [
-        int(time.open_t),
-        int(time.close_t)
+        time.open_t,
+        time.close_t
       ]
 
     arr_courses[course.code] = {
       "nombre": course.name,
-      "creditos": int(course.credit_course),
+      "creditos": course.credit_course,
       "semestre": course.semester,
       "horas": arr_time,
       "aulas": course.clasroom,
