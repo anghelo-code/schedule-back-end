@@ -6,7 +6,7 @@ from .recoverTable import recuperar_carreras, recuperar_cursos
 # Create your views here.
 def Careers_v(request):
   careers = list(Career.objects.values())
-  return JsonResponse([careers], safe=False)
+  return JsonResponse(careers, safe=False)
 
 
 def Courses_v(request, id_careers):
