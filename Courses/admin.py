@@ -6,9 +6,9 @@ from django.utils.html import format_html
 class MyModelAdmin(admin.ModelAdmin):
     
   def my_custom_button(self, obj):
-    return format_html('<a class="button" href="{}">Ejecutar código específico</a>',reverse('createTables'))
+    return format_html('<a class="button" href="{}">Actualizar Tablas</a>',reverse('createTables'))
   
-  my_custom_button.short_description = 'Ejecutar código específico'
+  my_custom_button.short_description = 'Actualizar Tablas'
   list_display = ('my_custom_button',)
     
 # Register your models here.
