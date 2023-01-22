@@ -1,7 +1,9 @@
 from django.shortcuts import get_list_or_404, render, redirect
 from django.http import JsonResponse, HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 from .models import Course, Career, Time, Day
-from .froms import CreateNewDay
+from .forms import CreateNewDay, CreateNewSuperUser
 from .recoverTable import recuperar_carreras, recuperar_cursos
 
 # Create your views here.
@@ -56,4 +58,21 @@ def createDay(request):
   else:
     Day.objects.create(day_name = request.POST["day_name"]);
     return redirect('/careers/')
-  
+
+def create_superuser(request):
+  if request.method == 'POST':
+    # obtén los datos del formulario
+    username = request.POST['username']
+    email = request.POST['email']
+    password = request.POST['password']
+    # Crea un nuevo usuario
+    user = User.objects.create_superuser(username, email, password)
+    # Inicia sesión automáticamente
+    login(request, user)
+    # Redirige a la página de inicio
+    return redirect('/admin/')
+
+  # Si el método es GET, simplemente renderiza la plantilla
+  return render(request, 'create_superuser.html', {
+    'form': CreateNewSuperUser()
+  })
