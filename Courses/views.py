@@ -1,6 +1,7 @@
-from django.shortcuts import get_list_or_404
+from django.shortcuts import get_list_or_404, render, redirect
 from django.http import JsonResponse, HttpResponse
-from .models import Course, Career, Time
+from .models import Course, Career, Time, Day
+from .froms import CreateNewDay
 from .recoverTable import recuperar_carreras, recuperar_cursos
 
 # Create your views here.
@@ -46,3 +47,13 @@ def CreateTable(request):
     recuperar_cursos(recup_carrera,diccionario_carreras)
 
   return HttpResponse('<h1>Se Creo las tablas de forma correcta</h1>')
+
+def createDay(request):
+  if request.method == 'GET':
+    return render(request, 'day.html', {
+    'form': CreateNewDay()
+  });
+  else:
+    Day.objects.create(day_name = request.POST["day_name"]);
+    return redirect('/careers/')
+  

@@ -1,0 +1,12 @@
+{% block content %}
+  <h1>Create a new Days</h1>
+  
+  <form method="POST">
+    {% csrf_token %}
+    {{form}}
+    <button>
+      save
+    </button>
+  </form>
+  
+{% endblock %}
