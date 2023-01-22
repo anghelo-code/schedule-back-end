@@ -14,8 +14,6 @@ class Course(models.Model):
  clasroom = models.CharField(max_length=35)
  id_career = models.ForeignKey(Career, on_delete=models.CASCADE )
  
- class Meta:
-  unique_together = ('code', 'id_career')
  def __str__(self):
   return self.name
 
@@ -31,9 +29,6 @@ class Time(models.Model):
  cod_day = models.ForeignKey(Day, on_delete=models.CASCADE)
  open_t = models.CharField(max_length=5)
  close_t = models.CharField(max_length=5)
-
- class Meta:
-  unique_together = ('cod_course', 'cod_day', 'open_t')
 
  def __str__(self):
   return str(self.cod_course) + "  " + str(self.cod_day)
