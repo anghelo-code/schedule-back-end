@@ -7,11 +7,11 @@ class Career(models.Model):
   return self.name
 
 class Course(models.Model):
- code = models.CharField(max_length=20)
- name = models.CharField(max_length=50)
+ code = models.CharField(max_length=50)
+ name = models.CharField(max_length=200)
  credit_course = models.CharField(max_length=20)
  semester = models.CharField(max_length=10)
- clasroom = models.CharField(max_length=35)
+ clasroom = models.CharField(max_length=150)
  id_career = models.ForeignKey(Career, on_delete=models.CASCADE )
  
  class Meta:
