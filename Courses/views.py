@@ -59,8 +59,7 @@ def ActualizarCarrera(request):
   else:
     career = get_object_or_404(Career, id=int(request.POST["id"]));
     dic = { career.name: request.POST["link"] }
-    print(dic[career.name])
-    # recuperar_cursos(career.name,dic);
+    recuperar_cursos(career.name,dic);
 
     return HttpResponse('<h1>Se Actualizo la Carrera de forma Correcta</h1>');
 
