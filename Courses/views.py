@@ -1,9 +1,9 @@
-from django.shortcuts import get_list_or_404, render, redirect
+from django.shortcuts import get_list_or_404, render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from .models import Course, Career, Time, Day
-from .forms import CreateNewDay, CreateNewSuperUser
+from .forms import CreateNewDay, CreateNewSuperUser, CreateCarrera
 from .recoverTable import recuperar_carreras, recuperar_cursos
 
 # Create your views here.
@@ -50,6 +50,22 @@ def CreateTable(request):
 
   return HttpResponse('<h1>Se Creo las tablas de forma correcta</h1>')
 
+
+def ActualizarCarrera(request):
+  if request.method == 'GET':
+    return render(request, 'actCarrera.html', {
+      'form': CreateCarrera()
+    })
+  else:
+    career = get_object_or_404(Career, id=int(request.POST["id"]));
+    dic = { career.name: request.POST["link"] }
+    print(dic[career.name])
+    # recuperar_cursos(career.name,dic);
+
+    return HttpResponse('<h1>Se Actualizo la Carrera de forma Correcta</h1>');
+
+
+
 def createDay(request):
   if request.method == 'GET':
     return render(request, 'day.html', {
@@ -58,6 +74,7 @@ def createDay(request):
   else:
     Day.objects.create(day_name = request.POST["day_name"]);
     return redirect('/careers/')
+
 
 def create_superuser(request):
   if request.method == 'POST':

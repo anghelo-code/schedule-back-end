@@ -7,4 +7,5 @@ urlpatterns = [
   path('createTables/', views.CreateTable, name='createTables'),
   path('createDay/', views.createDay, name='createDay'),
   path('createSuperuser/', views.create_superuser, name='createSuperuser'),
+  path('updateCareer/', views.ActualizarCarrera, name='updateCareer'),
 ]
