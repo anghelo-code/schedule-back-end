@@ -14,7 +14,7 @@ def Careers_v(request):
 
 def Courses_v(request, id_careers):
   courses = get_list_or_404(Course, id_career = int(id_careers))
-  arr_courses = {}
+  arr_courses = []
   for course in courses:
     arr_time = {}
     times = get_list_or_404(Time, cod_course = int(course.id))
@@ -26,13 +26,14 @@ def Courses_v(request, id_careers):
         time.close_t
       ]
 
-    arr_courses[course.code] = {
+    arr_courses.append( {
+      "id": course.code,
       "nombre": course.name,
       "creditos": course.credit_course,
       "semestre": course.semester,
       "horas": arr_time,
       "aulas": course.clasroom,
-    }
+    })
     
   return JsonResponse(arr_courses, safe=False)
 
